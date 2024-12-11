@@ -29,6 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     marker.setLatLng([latitude, longitude]);
     marker.openPopup(); 
   }   
+  
+  fetch('https://api.ipify.org?format=json')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Your IP address is: ' + data.ip);
+    getGeoData(data.ip);
+  })
+  .catch(error => console.log('Error fetching IP address:', error));
 
   function getIpFromDomain(ip) {
     const url = `https://cloudflare-dns.com/dns-query?name=${ip}&type=A`;
@@ -60,8 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
         ipAddressEl.textContent = data.ip || "IP Address not found";
         ispEl.textContent = data.isp || data.as.name;
         locationEl.textContent = `${data.location.city}, ${data.location.country}` || "Location not found";
-        timezoneEl.textContent = "UTC" + data.location.timezone;
-        
+        let timezone = data.location.timezone;
+        if (timezone.startsWith("+")) {
+          timezone = "-" + timezone.slice(1);
+        }
+        timezoneEl.textContent = "UTC" + timezone;
         let newlatitude = parseFloat(data.location.lat);
         let newlongitude = parseFloat(data.location.lng);
         updateMap(newlatitude, newlongitude);
