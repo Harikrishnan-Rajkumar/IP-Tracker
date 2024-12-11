@@ -128,8 +128,6 @@ button{
 }
 .info-content {
     padding-left: 2.4px;
-    animation: slideFromLeft .8s ease forwards;
-    transition: all .8s ease;
 }
 .map-container{
     position: relative;
@@ -143,6 +141,13 @@ button{
 }
 .info-title{
     font-size: 14px;
+}
+.hide{
+    visibility: hidden;
+}
+.slide-left{    
+    animation: slideFromLeft .8s ease forwards;
+    transition: all .8s ease;
 }
 @keyframes slideDown {
     0% {
