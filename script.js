@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let locationEl = document.getElementById("location");
   let timezoneEl = document.getElementById("timezone");
   let locationIcon = document.querySelector(".leaflet-marker-icon");
+  let infoContentEls = document.querySelectorAll(".info-content")
 
   let latitude = 40.6782;
   let longitude = -73.9442;
@@ -76,6 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
         let newlatitude = parseFloat(data.location.lat);
         let newlongitude = parseFloat(data.location.lng);
         updateMap(newlatitude, newlongitude);
+        infoContentEls.forEach(function(infoContent){
+          infoContent.classList.remove("hide");          
+          infoContent.classList.add("slide-left");          
+        });
+
       },
       error: function() {
         console.error('Error fetching geo data');
@@ -84,6 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function search(){
+    infoContentEls.forEach(function(infoContent){      
+      infoContent.classList.remove("slide-left");          
+    });    
     var ip = ipAddressInputEl.value.trim();
     if (/[a-zA-Z]/.test(ip)){
       getIpFromDomain(ip);
