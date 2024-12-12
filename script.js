@@ -15,9 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
     iconAnchor: [23, 28],
     popupAnchor: [0, -56]
   });
+
+  function zoomLevel() {
+    let width = window.innerWidth;
+    if (width <= 2000) {
+      return 13;
+    } else {
+      return 16;
+    }
+  }
+
   var map = L.map('map', {      
     attributionControl: false
-  }).setView([latitude, longitude], 13);
+  }).setView([latitude, longitude], zoomLevel());
 
   let marker = L.marker([latitude, longitude], { icon: customIcon }).addTo(map)
 
@@ -26,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }).addTo(map);
 
   function updateMap(latitude, longitude) {
-    map.setView([latitude, longitude], 13);
+    map.setView([latitude, longitude], zoomLevel());
     marker.setLatLng([latitude, longitude]);
     marker.openPopup(); 
   }   
