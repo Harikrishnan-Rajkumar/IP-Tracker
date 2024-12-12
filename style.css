@@ -30,7 +30,7 @@ h1{
 }
 .content{
     display: grid;
-    grid-template-rows: calc(var(--top-content-h) - (var(--info-container-h) / 2)) 1fr;
+    grid-template-rows: calc(var(--top-content-h) - (var(--info-container-h) / 2)) minmax(400px, 1fr);
     height: 100vh;
 }
 .top-bg {
@@ -71,9 +71,11 @@ input{
     padding-left: calc(3px + 1vw);
     outline-style: none;
     border-style: none;
+    font-size: calc(2px + 1.2vw);
 }
 input::placeholder{
     color: hsl(0, 0%, 59%);
+    font-size: calc(2px + 1.2vw);
 }
 button{
     width: 4.5%;
@@ -105,7 +107,8 @@ button{
     display: flex;
 }
 .info{
-    padding: calc(1.5vw + 15px); 
+    padding: calc(1.5vw + 15px);
+    padding-top: 0px; 
     position: relative;
     flex: 1;
 }
@@ -125,9 +128,13 @@ button{
 }
 .info-title{
     padding-bottom: calc(2px + 0.5vw);
+    color: hsl(0, 0%, 59%);
+    font-size: calc(2px + 0.9vw);
+    padding-top: 18%;
 }
 .info-content {
     padding-left: 2.4px;
+    font-size: calc(2px + 1.36vw);
 }
 .map-container{
     position: relative;
@@ -135,12 +142,6 @@ button{
 }
 .leaflet-control{
     display: none;
-}
-.info-title{
-    color: hsl(0, 0%, 59%);
-}
-.info-title{
-    font-size: 14px;
 }
 .hide{
     visibility: hidden;
@@ -210,18 +211,25 @@ button{
     }
     .info-content {
         padding-left: 0px;
+        font-size: calc(13px + 1vw);
     }   
     input{
         width: calc(85% - 4.5%);
         max-width: calc(85% - 50px);
         height: var(--search-h);
         border-radius: var(--bdr-r) 0 0 var(--bdr-r);
-        padding-left: calc(3px + 1vw);
+        padding-left: calc(15px + 1vw);
         outline-style: none;
         border-style: none;
+        font-size: 16px;
+    }
+    input::placeholder{
+        color: hsl(0, 0%, 59%);
+        font-size: 16px;
     }
     .info-title{
-        font-size: calc(8px + 1vw);
+        font-size: calc(7px + 0.9vw);
+        padding-top: 0px;
+        padding-bottom: 5px;
     }
 }
-leaflet-marker-icon leaflet-zoom-animated leaflet-interactive
