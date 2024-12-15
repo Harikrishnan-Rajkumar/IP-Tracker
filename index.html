@@ -22,23 +22,27 @@
           <h1 class="heading">IP Address Tracker</h1>
           <div class="search-container">
             <input id="ipAddressInput" type="text" placeholder="Search for any IP address or domain">
-            <button id="searchBtn"><img class="arrow" src="images/icon-arrow.svg"></button>
+            <button id="searchBtn"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="none" stroke="#FFF" stroke-width="3" d="M2 1l6 6-6 6"/></svg></button>
           </div>          
           <div class="info-container">
             <div class="info">
               <p class="info-title">IP ADDRESS</p>
+              <div class="loading dot-falling"></div>
               <p class="info-content hide" id="ipAddress">8.8.8.8</p>
             </div>
             <div class="info">
               <p class="info-title">LOCATION</p>
+              <div class="loading dot-falling"></div>
               <p class="info-content hide" id="location">Mountain View, US</p>
             </div>
             <div class="info">
               <p class="info-title">TIMEZONE</p>
+              <div class="loading dot-falling"></div>
               <p class="info-content hide" id="timezone">UTC-08:00</p>
             </div>
             <div class="info info-last">
               <p class="info-title">ISP</p>
+              <div class="loading dot-falling"></div>
               <p class="info-content hide" id="isp">Google LLC</p>
             </div>
           </div>
