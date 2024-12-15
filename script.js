@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ipAddressEl.textContent = data.ip || "IP Address not found";
         ispEl.textContent = data.isp || data.as.name;
         let region = data.location.region.replace(/^state of /i, '');
-        locationEl.textContent = `${region}, ${data.location.country}` || "Location not found";
+        locationEl.textContent = `${data.location.city}, ${region}, ${data.location.country}` || "Location not found";
         let timezone = data.location.timezone;
         if (timezone.startsWith("+")) {
           timezone = "-" + timezone.slice(1);
