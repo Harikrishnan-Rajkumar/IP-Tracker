@@ -15,14 +15,15 @@ p{
 h1{
     font-size: clamp(34px, 5vw - 60px, 70px);
     font-weight: 400;
-    padding-top: calc(2vw - 5px);
-    padding-bottom: calc((2vw - 5px) / 5);
+    padding-top: clamp(5px, 5vw - 5px, 50px);
+    padding-bottom: clamp(5px, 1vw - 5px, 25px);
 }
 :root {
-    --top-content-h : clamp(305px, 23.5vw - 25px, 820px);
-    --info-container-h : clamp(140px, 15vw - 90px, 380px);
+    --dot-width : 1vw;
+    --top-content-h : clamp(305px, 25vw - 25px, 820px);
+    --info-container-h : clamp(40px + 7vw, 15vw - 90px, 380px);
     --bdr-r : calc(0.5vw + 8px); /*border-radius */        
-    --search-h : calc(var(--info-container-h) / 3); /*search-bar-height*/
+    --search-h : calc(var(--info-container-h) / 2.8); /*search-bar-height*/
 }
 .wrapper{
     width: 100vw;
@@ -31,7 +32,7 @@ h1{
 .content{
     display: grid;
     grid-template-rows: calc(var(--top-content-h) - (var(--info-container-h) / 2)) minmax(400px, 1fr);
-    height: 100vh;
+    min-height: 100vh;
 }
 .top-bg {
     background: linear-gradient(to right, #453f9a, #4c52b2, #4e6cc1, #556bd1, #5976de, #5d82ed);
@@ -101,7 +102,7 @@ button{
 .info-container{
     height: var(--info-container-h);
     background: white;
-    width: 72.5%;
+    width: 75%;
     border-radius: var(--bdr-r);
     box-shadow: rgba(0, 0, 0, 0.22) 0px 55px 40px -30px;
     display: flex;
@@ -150,6 +151,78 @@ button{
     animation: slideFromLeft .8s ease forwards;
     transition: all .8s ease;
 }
+.dot-falling {
+    position: relative;
+    left: -9999px;
+    width: var(--dot-width);
+    height: var(--dot-width);
+    border-radius: 50%;
+    background-color: #9880ff;
+    color: #9880ff;
+    box-shadow: 9999px 0 0 0 #9880ff;
+    animation: dot-falling 1s infinite linear;
+    animation-delay: 0s;
+    margin-top: 1.25vw;
+}
+.dot-falling::before, .dot-falling::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+}
+.dot-falling::before {
+    width: var(--dot-width);
+    height: var(--dot-width);
+    border-radius: 50%;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-falling-before 1s infinite linear;
+    animation-delay: 0.18s;
+}
+.dot-falling::after {
+    width: var(--dot-width);;
+    height: var(--dot-width);;
+    border-radius: 50%;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-falling-after 1s infinite linear;
+    animation-delay: 0.08s;
+}
+  
+@keyframes dot-falling {
+    0% {
+      box-shadow: 9999px -1.5vw 0 0 rgba(152, 128, 255, 0);
+    }
+    25%, 50%, 75% {
+      box-shadow: 9999px 0 0 0 #9880ff;
+    }
+    100% {
+      box-shadow: 9999px 1.5vw 0 0 rgba(152, 128, 255, 0);
+    }
+}
+@keyframes dot-falling-before {
+    0% {
+      box-shadow: calc(9999px + 3vw) -1.5vw 0 0 rgba(152, 128, 255, 0);
+    }
+    25%, 50%, 75% {
+      box-shadow: calc(9999px + 3vw) 0 0 0 #9880ff;
+    }
+    100% {
+      box-shadow: calc(9999px + 3vw) 1.5vw 0 0 rgba(152, 128, 255, 0);
+    }
+}
+@keyframes dot-falling-after {
+    0% {
+      box-shadow: calc(9999px + 1.5vw) -1.5vw 0 0 rgba(152, 128, 255, 0);
+    }
+    25%, 50%, 75% {
+      box-shadow: calc(9999px + 1.5vw) 0 0 0 #9880ff;
+    }
+    100% {
+      box-shadow: calc(9999px + 1.5vw) 1.5vw 0 0 rgba(152, 128, 255, 0);
+    }
+}
+
 @keyframes slideDown {
     0% {
       transform: translateY(200%);
@@ -178,6 +251,13 @@ button{
     }    
 }
 @media (max-width: 800px) {
+    :root {
+        --dot-width : 3vw;
+        --top-content-h : clamp(305px, 25vw - 25px, 820px);
+        --info-container-h : clamp(140px, 15vw - 90px, 380px);
+        --bdr-r : calc(0.5vw + 8px); /*border-radius */        
+        --search-h : calc(var(--info-container-h) / 3); /*search-bar-height*/
+    }
     .top-content{
         display: grid;
         justify-items: center;
@@ -196,7 +276,9 @@ button{
     .info{
         background: white;
         text-align: center;
-        padding: calc(6px + 1vw); 
+        padding: calc(6px + 1vw);
+        display: flex;
+        flex-direction: column;
     }
     .info:nth-child(1){
         padding-top: calc(10px + 2vw);       
@@ -232,4 +314,52 @@ button{
         padding-top: 0px;
         padding-bottom: 5px;
     }
+    .loading{
+        align-self: center;
+    }  
+    .dot-falling {
+        animation-delay: 0.08s;
+        margin: 0;
+        padding: 0;
+    }
+    .dot-falling::before {
+        animation-delay: 0s;
+    }
+    .dot-falling::after {
+        animation-delay: 0.18s;
+    }
+    @keyframes dot-falling {
+        0% {
+          box-shadow: 9999px -1.5vw 0 0 rgba(152, 128, 255, 0);
+        }
+        25%, 50%, 75% {
+          box-shadow: 9999px 0 0 0 #9880ff;
+        }
+        100% {
+          box-shadow: 9999px 1.5vw 0 0 rgba(152, 128, 255, 0);
+        }
+    }
+    @keyframes dot-falling-before {
+        0% {
+          box-shadow: calc(9999px - 6vw) -1.5vw 0 0 rgba(152, 128, 255, 0);
+        }
+        25%, 50%, 75% {
+          box-shadow: calc(9999px - 6vw) 0 0 0  #9880ff;
+        }
+        100% {
+          box-shadow: calc(9999px - 6vw) 1.5vw 0 0 rgba(152, 128, 255, 0);
+        }
+    }
+    @keyframes dot-falling-after {
+        0% {
+          box-shadow: calc(9999px + 3vw) -1.5vw 0 0 rgba(152, 128, 255, 0);
+        }
+        25%, 50%, 75% {
+          box-shadow: calc(9999px + 3vw) 0 0 0 #9880ff;
+        }
+        100% {
+          box-shadow: calc(9999px + 3vw) 1.5vw 0 0 rgba(152, 128, 255, 0);
+        }
+    }
+    
 }
